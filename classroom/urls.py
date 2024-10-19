@@ -1,11 +1,17 @@
+from django.conf import settings  # to import function of settings.py
+from django.conf.urls.static import static  # to use media files
 from django.urls import include, path
 
-from .views import classrooms, home, login, students, teachers
+from .views import classroom
 
 urlpatterns = [
-    path("", home),
-    path("login/", login),
-    path("teachers/", teachers),
-    path("students/", students),
-    path("classrooms/", classrooms),
+    path("", classroom.home, name="home"),
+    path("dashboard/", classroom.dashboard, name="dashboard"),
 ]
+
+urlpatterns += static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)  # to use media files
+urlpatterns += static(
+    settings.STATIC_URL, document_root=settings.STATIC_ROOT
+)  # to use static files

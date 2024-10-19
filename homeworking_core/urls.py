@@ -15,10 +15,34 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.conf import settings  # to import function of settings.py
+from django.conf.urls.static import static  # to use media files
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import include, path
+
+from classroom.views import classroom, students, teachers
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("classroom.urls")),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/signup/", classroom.SignUpView.as_view(), name="signup"),
+    path(
+        "accounts/signup/student/",
+        students.StudentSignUpView.as_view(),
+        name="student_signup",
+    ),
+    path(
+        "accounts/signup/teacher/",
+        teachers.TeacherSignUpView.as_view(),
+        name="teacher_signup",
+    ),
 ]
+
+urlpatterns += static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)  # to use media files
+urlpatterns += static(
+    settings.STATIC_URL, document_root=settings.STATIC_ROOT
+)  # to use static files

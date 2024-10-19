@@ -1,0 +1,43 @@
+{% extends "registration/base.html" %}
+
+
+{% block content %}
+
+<section class="bg-light text-center">
+    <div class="container">
+      <div class="row-responsive">
+        <h1>
+          Inscreva-se para obter um conta grátis
+        </h1>
+        <h5>
+          Selecione abaixo o tipo de conta que deseja criar.
+        </h5>
+  
+  
+        <div class="row center">
+          <div class="col-1">
+            <div class="card-body">
+              
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card-body">
+              <a href="{% url 'student_signup' %}" class="btn btn-primary" role="button">Sou Aluno</a>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="card-body">
+             
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card-body">
+              <a  href="{% url 'teacher_signup' %}" class="btn btn-danger" role="button">Sou Professor</a>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+from django.forms import Media
+
+# from fastapi.staticfiles import StaticFiles
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "crispy_forms",
     "classroom",
 ]
 
@@ -101,6 +106,18 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Configuração do modelo de usuário customizado
+AUTH_USER_MODEL = "classroom.User"
+
+LOGIN_URL = "login"
+
+LOGOUT_URL = "logout"
+
+LOGIN_REDIRECT_URL = "dashboard"
+
+LOGOUT_REDIRECT_URL = ""
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -115,8 +132,20 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+# Foi adcionado o STATICFILES_DIRS para que o Django possa encontrar os arquivos estáticos.
 
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "base_static",
+]
+
+# Configuração do FastAPI para servir os arquivos estáticos
+STATIC_ROOT = BASE_DIR / "static"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
