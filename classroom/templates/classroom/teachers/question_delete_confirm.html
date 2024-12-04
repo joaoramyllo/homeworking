@@ -1,0 +1,47 @@
+{% extends 'global/base_dashboard.html' %}
+
+{% block content %}
+
+
+<!--FIM DO MENU-->
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change_list' %}">Minhas Avaliações</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change' quiz.pk %}">{{ quiz.name }}</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'classroom:question_change' quiz.pk question.pk %}">{{ question.text }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Confirmar delete da questão</li>
+  </ol>
+</nav>
+<br>
+
+
+
+<div class="col-md-12">
+  
+  <div class="row justify-content-md-center">
+    
+    <div  class="shadow p-3 mb-5 bg-white rounded" class="col-sm-9">
+      <h1 class="h3 mb-0 text-gray-800">Confirmar delete da questão</b></h1><br>
+      <p class="subtitle">
+        Tem certeza de que deseja excluir a questão <strong> "{{question.text}}" </strong>? 
+      </p>
+      <p>Não há como voltar atrás!</p>
+
+      <br>
+      <div class="form-group">
+        
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-lg">Sim, eu tenho certeza! <i class="fas fa-eraser"></i></button>
+          <a href="{% url 'classroom:question_change' quiz.pk question.pk %}" class="btn btn-outline-secondary btn-lg" role="button">Cancelar <i class="fas fa-window-close"></i></a>
+        </form>  
+      </div>             
+     
+  </div>      
+  </div>
+</div>
+
+<br><br><br><br><br><br><br>
+  
+{% endblock %}

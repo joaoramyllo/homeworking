@@ -1,0 +1,126 @@
+{% extends 'global/base_dashboard.html' %}
+
+{% load crispy_forms_tags crispy_forms_filters %}
+
+{% block content %}
+
+
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change_list' %}">Minhas Avaliações</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change' quiz.pk %}">{{ quiz.name }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ question.text }}</li>
+  </ol>
+</nav>
+<br>
+
+
+
+
+<div class="col-md-12">
+  
+  <div class="row justify-content-md-center">
+    
+    <div  class="col-sm-8">
+      <h1 class="">Cadastre as alternativas:</b></h1><br>
+      <br>
+      <div class="form-group">
+        
+        <form method="post" novalidate>
+          <center>
+            {% csrf_token %}
+            {{ formset.management_form }}
+            {{ form.media }}
+            {{ form.as_p }}
+          <br>
+
+        </center>
+          <div class="col-md-12">  
+            <div class="row justify-content-md">    
+              
+              <div class="col-sm-12">
+                
+                <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+                  
+                  <div class="card-body">
+                    <h1 class="h3 mb-0 text-gray-800">{{ thread.title }}</h1><br>
+                    <p> {{ thread.body }}</p>  
+                    
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <p class="h5 mb-0 text-gray-800">Respostas:</p>
+                        
+                      </div>
+          
+                      <div class="col-sm-2">
+                        <p class="h5 mb-0 text-gray-800">Correta? </p> <center><i class="fas fa-check-circle"></i></center>
+                       
+                      </div>
+          
+                      <div class="col-sm-2">
+                        <p class="h5 mb-0 text-gray-800">Deletar? </p> <center><i class="fas fa-window-close"></i></center>
+                       
+                      </div>  
+                      <br> <br><br>
+                      <!---------------->
+
+                      {% for form in formset %} 
+                        <div class="col-sm-8">
+                          
+                          
+                              {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                                {{ form.text }}
+                              {% if form.instance.pk and form.text.value != form.instance.text %}<p class="mb-0 mt-1"><small class="text-muted font-italic"><strong>Resposta antiga:</strong> {{ form.instance.text }}</small></p>{% endif %}
+                          
+                        </div>
+            
+                        <div class="col-sm-2">
+                         <br> <p></p>
+                          <div class="d-flex justify-content-center">
+                            
+                              
+                              {{ form.is_correct }}
+                            
+                          </div>
+                          
+                        </div>
+            
+                        <div class="col-sm-2">
+                          
+                          <br> <p></p>
+                          <div class="d-flex justify-content-center">
+                            
+                              
+                            {% if form.instance.pk %}
+                              {{ form.DELETE }}
+                            {% endif %}                            
+                          </div>
+                              
+                              
+                          
+                        </div>  
+                        <br><br><br>
+                      {% endfor %}
+                  </div>     
+                     
+                </div>           
+             
+              
+          <button type="submit" class="btn btn-success">Salvar mudanças <i class="fas fa-check-circle"></i></button>
+          <a href="{% url 'classroom:quiz_change' quiz.pk %}" class="btn btn-danger" role="button">Cancelar <i class="fas fa-window-close"></i></a>
+          <a href="{% url 'classroom:question_delete' quiz.pk question.pk %}" class="btn btn-outline-secondary float-right">Deletar <i class="fas fa-eraser"></i></a>
+          <br>
+          <p>
+            <small class="form-text text-muted">Sua pergunta pode ter no mínimo <strong>2</strong> respostas e máximo <strong>10</strong> respostas. Selecione pelo menos uma resposta como correta.</small>
+          </p>
+        </div>
+        </form>   
+              
+
+
+      </div></div>
+
+
+<br><br>
+{% endblock %}

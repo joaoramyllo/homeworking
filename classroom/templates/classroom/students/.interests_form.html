@@ -1,0 +1,44 @@
+{% extends 'newbase.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+{% block scripts_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/newbase.css' %}">
+
+{% endblock scripts_head %}
+{% block content %}
+
+<h1 class="h3 mb-0 text-gray-800">Atualize o seu período:</h1><br>
+<p>Aqui é possível alterar o período caso esteja matriculado em disciplinas de diferentes períodos.</p>
+
+
+<div class="col-md-12">  
+  <div class="row justify-content-md-center">    
+    
+    <div class="col-sm-6">
+      <br>
+      <div class="shadow p-3 mb-5 bg-white rounded" class="card">   
+        <div class="card-body">
+        
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form|crispy}}
+            <br>
+        </div>
+      </div>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <a style="margin-left: 26px;" href="{% url 'students:quiz_list' %}" class="btn btn-danger">Cancelar</a>
+          </form> 
+
+        
+    </div>
+  </div>
+</div>
+
+
+
+<br><br><br>
+
+  
+
+{% endblock %}

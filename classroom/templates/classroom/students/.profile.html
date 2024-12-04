@@ -1,0 +1,241 @@
+{% extends 'newbase.html' %}
+{% load static %}
+
+{% block scripts_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/newbase.css' %}">
+
+{% endblock scripts_head %}
+<!--
+{% for avatar in avatars %}
+    {%if avatar.primary == True %}
+        <img style="height: 60px;" src="{{avatar.avatar.url}}" alt="{{avatar.avatar.url}}">
+    {% endif %}
+{% endfor %}
+-->
+
+{% block content %}
+
+
+<div class="col-md-12">  
+  <div class="row justify-content-md-center"> 
+    
+    <div class="col-sm-7">
+      <h1 >Perfil<i class="fas fa-user"></i></h1><br>
+        
+      
+      <!--BLOCO PERFIL-->
+      <div class="shadow p-3 mb-5 bg-white rounded"  class="card">       
+        <div style="border: 1px solid #000;border-radius: 8px;" class="card-body">
+          <div class="col-md-12">            
+            <div class="row justify-content-md-center"> 
+              <h3> <strong> {{user.username}} </strong>
+              {% if user.level == 1%}
+                <img src="{% static 'img/bronze.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+              {% elif user.level == 2%}
+                <img src="{% static 'img/prata.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+              {% elif user.level == 3%}
+                <img src="{% static 'img/ouro.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>  
+              {% elif user.level == 4%}
+                <img src="{% static 'img/diamante.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+              {% elif user.level == 5%}
+                <img src="{% static 'img/ametista.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+              {% elif user.level == 6%}
+                <img src="{% static 'img/tumalina.png' %}" class="img-fluid" alt="Patamar" width="45" height="45"> </h3>
+              {% elif user.level == 7%}
+                <img src="{% static 'img/ruby.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+              {% elif user.level == 8%}    
+                <img src="{% static 'img/esmeralda.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>          
+                
+              {% endif %}
+            </div>            
+          </div>  
+          <div class="col-md-6">
+            <div class="row">              
+              <p class="">Nome:   <i class="fas fa-user-circle"></i> {{user.first_name}} {{user.last_name}} </p>                
+            </div>
+          </div> 
+                  
+          <div class="col-md-6">
+            <div class="row">              
+              <p class="">XP:  <i style="color: #FFDF00;" class="fas fa-trophy"></i> {{user.points}} </p>                
+            </div>
+          </div> 
+          <div class="col-md-6">
+            <div class="row">
+              <p class="">Nível: <i style="color: #0d0354;" class="fas fa-certificate"></i> {{user.level}}   </p>                
+            </div>
+          </div>          
+          <div class="col-md-6">
+            <div class="row">
+              <p class="">Desafios concluídos: {{user.total_desafio_concluidos}} de 36  <i class="fas fa-crown"></i></p>                
+            </div>
+          </div> 
+          <div class="col-md-8">
+            <div class="row">
+              <p class="">
+                Períodos de interesse: <i class="fas fa-award"></i> {% for subject in user.student.interests.all %} {{ subject.get_html_badge }}{% endfor %}
+              </p>                
+            </div>
+          </div>           
+        </div>
+      </div>
+
+      <!---->
+     
+      <h2>Tarefas</h2>
+      <div class="row justify-content-md-center">
+        
+        <div class="col-sm-6">
+          <div class="card text-white bg-danger mb-3" style="max-width: 22rem;">
+            <div class="card-header"> <i class="fas fa-thumbtack"></i> Tarefas Pendentes:</div>
+            <div class="card-body">
+              <h1 class="text-white" class="display-5 mt-1 mb-3">{{ user.cont_add }}</h1>
+              <div class="mb-1">
+                <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> Conclua suas Tarefas! </span>
+                
+              </div>
+            </div>
+          </div>          
+          
+        </div>
+        
+        <div class="col-sm-6">
+          <div class="card text-white bg-success mb-3" style="max-width: 22rem;">
+            <div class="card-header"><i class="fas fa-tasks"></i> Tarefas Concluídas:</div>
+            <div class="card-body">
+              <h1 class="text-white" class="display-5 mt-1 mb-3">{{ user.cont_completed }}</h1>
+              <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> Tarefas Concluídas, Parabéns! </span>
+            </div>
+          </div>
+         
+          
+        </div>
+
+     
+      </div>
+      <br>
+      <div class="row justify-content-md">
+        
+        <div class="col-sm-12">
+          <div class="shadow p-3 mb-5 bg-white rounded" class="card">                
+            <div class="card-body">
+              <h5 class="card-title mb-4">Tarefas a serem Concluídas:</h5>
+              <div class="d-flex flex-row-reverse">
+                <a href="{% url 'students:add_tarefa' %}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                  Adicionar tarefa</a>
+              </div>
+            </div>
+            <!--TABELA-->
+
+            <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr >
+                        <th scope="col">Tarefas</th>
+                        <th scope="col">Data de Início</th>
+                        <th scope="col">Data de Termino</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for list in lists %}
+                    {% if list.list_student.id  == user.id %}
+                        <tr>
+                            
+                            <td > <a href="{% url 'students:concluir_tarefa' list.id %}" title="">{{ list.item }} </a></td>
+                            <td>{{ list.start_date }}</td>
+                            <td>{{ list.end_date }}</td>
+                        </tr>
+                    {% endif %}
+                    {% empty %}
+                        <tr>
+                            <th class="text-center font-italic" colspan="4">Nenhuma Tarefa foi Cadastrada até o momento.</th>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+          </div>
+
+
+
+          </div>
+          
+        </div>
+        
+
+
+
+
+
+        
+    
+        
+    </div>
+    
+
+    <div class="col-sm-5">
+      <br>
+      <h2 >Insígnias <i class="fas fa-medal"></i></h2>
+      
+      
+      <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+        
+        <div class="card-body">
+         
+          <br>
+           <!--Linha 1-->
+          <div class="row justify-content-md-center">
+             <!-- Insígnia 1 -->
+            {% for insignia in insignias%}
+              <div class="col-sm-3">
+                {% if user.insignia_1 == True and forloop.counter == 1 or user.insignia_2 == True and forloop.counter == 2 or user.insignia_3 == True and forloop.counter == 3 or user.insignia_4 == True and forloop.counter == 4 or user.insignia_5 == True and forloop.counter == 5 or user.insignia_6 == True and forloop.counter == 6 or user.insignia_7 == True and forloop.counter == 7 or user.insignia_8 == True and forloop.counter == 8 %}
+                
+                
+                  <div class="card">                
+                    <div class="btn btn-outline-success" class="card-body" data-toggle="tooltip" data-placement="top" 
+                    data-html="true" title="<h6>{{insignia.nome}}: </h6> {{insignia.insignia_descricao}} <br> [{{insignia.insignia_descricao2}}]">
+                      <p><img class="img-fluid"  src="{{insignia.insignia.url}}" width="120" ><i class="fas fa-check-circle"></i>
+                       
+                      </p>
+              
+                    </div>
+                  </div>
+                {% else %}
+                
+                
+                <div class="card">                
+                  <div class="btn btn-outline-dark" class="card-body" data-toggle="tooltip" data-placement="top" 
+                  data-html="true" title="<h6>{{insignia.nome}}: </h6> {{insignia.insignia_descricao}} <br> [{{insignia.insignia_descricao2}}]">
+                    <p><img class="img-fluid" src="{{insignia.insignia.url}}" width="120" ></p>
+            
+                  </div>
+                </div>
+                {% endif %}
+              </div>                
+            {% endfor %}
+            
+            
+
+        </div>
+       
+      </div>
+      <div class="d-flex flex-row-reverse">
+        <a style="margin-right: 10px; color: #0d0354;" href="{% url 'students:desafios' %}" ></i>
+          Visualizar Desafios <i class="fas fa-crown"></i></a> 
+      </div><br>
+    </div>
+    
+  </div>
+</div>
+
+
+{% block finalPage %}
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+{% endblock %}
+<br><br>
+{% endblock %}
+

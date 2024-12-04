@@ -1,0 +1,42 @@
+{% extends 'newbase.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block scripts_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/newbase.css' %}">
+
+{% endblock scripts_head %}
+{% block content %}
+
+<br>
+
+<div class="col-md-12">
+  <div class="row justify-content-md-center">
+    
+    <div class="col-sm-8">
+      <h1 >Cadastre uma nova Tarefa</h1><br>
+      <p>Organize suas Tarefas e nunca mais perca seus Prazos!</p>
+    </div>
+    
+    <div class="col-sm-6">
+      <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+        <div class="card-body">
+
+            
+          <div class="form-group">
+            <form class="form_tarefa" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{form|crispy}}
+              
+              <br>
+              <button class="btn btn-primary"type="submit">Salvar</button>
+            </form>
+          </div>             
+        </div>
+      </div>   
+    </div>      
+  </div>
+</div>
+
+
+  <br>
+{% endblock%}

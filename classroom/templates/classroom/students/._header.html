@@ -1,0 +1,48 @@
+
+<section style="border-radius: 8px; " class="hero is-small is-dark is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-centered">
+        Perfil
+      </h1>
+      <h2 class="subtitle has-text-centered">
+        <i class="fas fa-angle-double-left"></i> Bem-vindo <strong>{{user.username}}
+          | Nivel: 
+          {% if user.level == 1%}
+          <span>
+            {{user.level}}
+          </span>
+      {% elif user.level == 2%}
+          <span style="background: #474040; color: white; border-radius: 1px;">
+            {{user.level}}
+          </span>
+      {% elif user.level == 3%}
+          <span style="background: linear-gradient(to bottom right, #000066 -6%, #ff0000 104%); color: #d4ffdf; border-radius: 3px;">
+          {{user.level}}
+          </span>
+      {% elif user.level == 4%}
+          <span style="background: linear-gradient(to bottom right, #000066 -6%, #ff0000 104%); color: #d4ffdf; border-radius: 3px;">
+          {{user.level}}
+          </span>
+      {% elif user.level == 5%}
+          <span style="background: linear-gradient(to bottom right, #000066 -6%, #ff0000 104%); color: #d4ffdf; border-radius: 3px;">
+          {{user.level}}
+          </span>
+      {% endif %}
+      <i class="fas fa-angle-double-right"> </i>
+      </h2>
+      <h2 class="subtitle has-text-centered">
+        Você está indo muito bem! Sua EXP é de {{user.points}} <i class="far fa-hand-spock"></i></i>
+      </h2>
+      <p class="subtitle has-text-centered">
+        Períodos de interesse:{% for subject in user.student.interests.all %} {{ subject.get_html_badge }}{% endfor %}
+      </p>
+    </div>
+  </div>
+</section>
+
+
+    </div>
+  </section>
+
+

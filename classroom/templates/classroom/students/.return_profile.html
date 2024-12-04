@@ -1,0 +1,135 @@
+{% extends 'newbase.html' %}
+{% load static %}
+{% block scripts_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/newbase.css' %}">
+
+{% endblock scripts_head %}
+{% block content %}
+<br>
+
+
+<div class="col-md-12">  
+    <div class="row justify-content-md-center"> 
+      
+      <div class="col-sm-7">
+        <h1 >Perfil <i class="fas fa-user"></i></h1>
+        <div class="d-flex flex-row-reverse">
+            <a href=" {% url 'students:ranking' %}" class="btn btn-sm btn-primary"><i class="fas fa-arrow-left"></i>
+              Voltar</a>
+          </div>
+        <br>
+          
+        
+        <!--BLOCO PERFIL-->
+        <div class="shadow p-3 mb-5 bg-white rounded"  class="card">       
+          <div style="border: 1px solid #000;border-radius: 8px;" class="card-body">
+            <div class="col-md-12">            
+              <div class="row justify-content-md-center"> 
+                <h3> <strong> {{unic.username}} </strong>
+                {% if unic.level == 1%}
+                  <img src="{% static 'img/bronze.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                {% elif unic.level == 2%}
+                  <img src="{% static 'img/prata.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                {% elif unic.level == 3%}
+                  <img src="{% static 'img/ouro.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>  
+                {% elif unic.level == 4%}
+                  <img src="{% static 'img/diamante.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                {% elif unic.level == 5%}
+                  <img src="{% static 'img/ametista.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                {% elif unic.level == 6%}
+                  <img src="{% static 'img/tumalina.png' %}" class="img-fluid" alt="Patamar" width="45" height="45"> </h3>
+                {% elif unic.level == 7%}
+                  <img src="{% static 'img/ruby.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                {% elif unic.level == 8%}    
+                  <img src="{% static 'img/esmeralda.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>          
+                  
+                {% endif %}
+              </div>            
+            </div>  
+            <div class="col-md-6">
+              <div class="row">              
+                <p class="">Nome:   <i class="fas fa-user-circle"></i> {{unic.first_name}} {{unic.last_name}} </p>                
+              </div>
+            </div> 
+            <div class="col-md-6">
+              <div class="row">
+                <p class="">XP:  <i style="color: #FFDF00;" class="fas fa-trophy"></i> {{unic.points}} </p>                
+              </div>
+            </div> 
+            <div class="col-md-6">
+              <div class="row">
+                <p class="">Nível: <i style="color: #0d0354;" class="fas fa-certificate"></i> {{unic.level}}   </p>                
+              </div>
+            </div>          
+            <div class="col-md-6">
+              <div class="row">
+                <p class="">Desafios concluídos: {{unic.total_desafio_concluidos}} de 36  <i class="fas fa-crown"></i></p>                
+              </div>
+            </div> 
+            <div class="col-md-8">
+              <div class="row">
+                <p class="">
+                    Períodos de interesse:<i class="fas fa-award"></i> {% for subject in unic.student.interests.all %} {{ subject.get_html_badge }}{% endfor %}
+                  
+                </p>    
+        
+              </div>
+            </div>          
+          </div>
+          <br>
+          <h4 >Insígnias</h4>
+                
+                
+                <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+                
+                <div class="card-body">
+                
+                    <br>
+                    <!--Linha 1-->
+                    <div class="row justify-content-md-center">
+                    <!-- Insígnia 1 -->
+                    {% for insignia in insignias%}
+                    <div class="col-sm-3">
+                        {% if unic.insignia_1 == True and forloop.counter == 1 or unic.insignia_2 == True and forloop.counter == 2 or unic.insignia_3 == True and forloop.counter == 3 or unic.insignia_4 == True and forloop.counter == 4 or unic.insignia_5 == True and forloop.counter == 5 or unic.insignia_6 == True and forloop.counter == 6 or unic.insignia_7 == True and forloop.counter == 7 or unic.insignia_8 == True and forloop.counter == 8 %}
+                        
+                        
+                        <div class="card">                
+                            <div class="btn btn-outline-success" class="card-body" data-toggle="tooltip" data-placement="top" 
+                            data-html="true" title="<h6>{{insignia.nome}}: </h6> {{insignia.insignia_descricao}} <br> [{{insignia.insignia_descricao2}}]">
+                            <p><img class="img-fluid"  src="{{insignia.insignia.url}}" width="120" ><i class="fas fa-check-circle"></i>
+                            
+                            </p>
+                    
+                            </div>
+                        </div>
+                        {% else %}
+                        
+                        
+                        <div class="card">                
+                        <div class="btn btn-outline-dark" class="card-body" data-toggle="tooltip" data-placement="top" 
+                        data-html="true" title="<h6>{{insignia.nome}}: </h6> {{insignia.insignia_descricao}} <br> [{{insignia.insignia_descricao2}}]">
+                            <p><img class="img-fluid" src="{{insignia.insignia.url}}" width="120" ></p>
+                    
+                        </div>
+                        </div>
+                        {% endif %}
+                    </div>                
+                {% endfor %}
+                    
+              
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+    <br><br><br><br>
+    {% block finalPage %}
+        <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        </script>
+    {% endblock %}
+{% endblock %}

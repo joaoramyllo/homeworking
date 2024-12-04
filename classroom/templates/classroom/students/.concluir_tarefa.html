@@ -1,0 +1,60 @@
+{% extends 'newbase.html' %}
+{% load static %}
+{% block scripts_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/newbase.css' %}">
+
+{% endblock scripts_head %}
+{% block content %}
+<br>
+<div class="col-md-12">
+  <div class="row justify-content-md-center">
+    
+    <div class="col-sm-8">
+      
+      <h1 >Detalhes da Tarefa: {{list.item}}</h1><br>
+    </div>
+    <div class="col-sm-8">
+    <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+      <div class="card-body">
+
+          
+    <div class="table-responsive">
+      <table class="table">
+          <thead>
+              <tr >
+                <th scope="col">Tarefa</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Data de Início</th>
+                <th scope="col">Data de Termino</th>
+              </tr>
+          </thead>
+          <tbody>
+            
+                <tr>
+                  <td class="align-middle">{{list.item}}</td>
+                  <td class="align-middle">{{list.descricao}}</td>
+                  <td class="align-middle">{{list.start_date}}</td>
+                  <td class="align-middle">{{list.end_date}}</td>
+                </tr>
+            
+          </tbody>
+      </table>
+      <br>   <br>   <br>
+      </div>
+      <div class="d-flex flex-row-reverse">
+    
+        <form method="post">
+          {% csrf_token %}
+          <button class="btn btn-primary " type="submit">Concluir <i class="far fa-calendar-check"></i></button>
+        </form>
+      </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+  <br><br><br><br><br>  <br><br><br><br><br>  <br><br>
+</div>
+
+{% endblock %}

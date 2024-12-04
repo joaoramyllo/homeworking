@@ -1,0 +1,66 @@
+{% extends 'newbase.html' %}
+
+{% load static %}
+{% block scripts_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/newbase.css' %}">
+
+{% endblock scripts_head %}
+{% block content %}
+
+<div class="col-md-12">
+    
+    <div class="row justify-content-md-center">
+        
+      <div class="col-sm-8">
+        <h1 >Lista de Desafios</h1><br>
+        <div class="d-flex flex-row-reverse">
+            <a href="{% url 'students:profile'%}" class="btn btn-primary"><i class="fas fa-arrow-left"></i>
+              Voltar</a>
+          </div>
+          <br>
+      </div>
+      
+      <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+          <div class="card-body">
+
+          
+            <div class="col-sm-12">
+                {% for desafio in desafios %}
+                
+                    <div class="card">
+                    {% if user.desafio_concluida_1 == True and forloop.counter == 1 or  user.desafio_concluida_2 == True and forloop.counter == 2  or  user.desafio_concluida_3 == True and forloop.counter == 3 or  user.desafio_concluida_4 == True and forloop.counter == 4 or  user.desafio_concluida_5 == True and forloop.counter == 5 or  user.desafio_concluida_6 == True and forloop.counter == 6 or  user.desafio_concluida_7 == True and forloop.counter == 7 or  user.desafio_concluida_8 == True and forloop.counter == 8  or  user.desafio_concluida_9 == True and forloop.counter == 9  or  user.desafio_concluida_10 == True and forloop.counter == 10 or  user.desafio_concluida_11 == True and forloop.counter == 11 or  user.desafio_concluida_12 == True and forloop.counter == 12 or  user.desafio_concluida_13 == True and forloop.counter == 13 or  user.desafio_concluida_14 == True and forloop.counter == 14 or  user.desafio_concluida_15 == True and forloop.counter == 15 or user.desafio_concluida_16 == True and forloop.counter == 16 or user.desafio_concluida_17 == True and forloop.counter == 17 or user.desafio_concluida_18 == True and forloop.counter == 18 or user.desafio_concluida_19 == True and forloop.counter == 19 or user.desafio_concluida_20 == True and forloop.counter == 20 or user.desafio_concluida_21 == True and forloop.counter == 21 or user.desafio_concluida_22 == True and forloop.counter == 22 or user.desafio_concluida_23 == True and forloop.counter == 23 or user.desafio_concluida_24 == True and forloop.counter == 24 or user.desafio_concluida_25 == True and forloop.counter == 25 or user.desafio_concluida_26 == True and forloop.counter == 26 or user.desafio_concluida_27 == True and forloop.counter == 27 or user.desafio_concluida_28 == True and forloop.counter == 28 or user.desafio_concluida_29 == True and forloop.counter == 29 or user.desafio_concluida_30 == True and forloop.counter == 30 or user.desafio_concluida_31 == True and forloop.counter == 31 or user.desafio_concluida_32 == True and forloop.counter == 32 or user.desafio_concluida_33 == True and forloop.counter == 33 or user.desafio_concluida_34 == True and forloop.counter == 34 or user.desafio_concluida_35 == True and forloop.counter == 35 or user.desafio_concluida_36 == True and forloop.counter == 36%}
+                        
+                        <div  class="btn btn-outline-success"class="card-body">
+                            <!-- {{forloop.counter}} - -->
+                            
+                            {{ desafio.desafio}} 
+                            [Nível do Desafio: {{ desafio.nivel_desafio }}]
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    
+                    {% else %}
+                        <div  class="btn btn-outline-dark" class="card-body">
+                        
+                        <!-- {{forloop.counter}} - -->
+                        {{ desafio.desafio}} 
+                        [Nível do Desafio: {{ desafio.nivel_desafio }}]
+                        
+                    </div>
+                    {% endif %}
+                    </div>
+        
+                {% endfor %}
+            </div>      
+        </div>
+    </div>
+      
+    </div><br><br><br>
+  </div>
+
+
+
+
+
+
+
+{% endblock %}

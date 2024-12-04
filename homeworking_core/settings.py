@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "crispy_forms",
+    "crispy_bootstrap5",
     "classroom",
+    #"ckeditor",
 ]
 
 MIDDLEWARE = [
@@ -113,9 +115,9 @@ LOGIN_URL = "login"
 
 LOGOUT_URL = "logout"
 
-LOGIN_REDIRECT_URL = "dashboard"
+LOGIN_REDIRECT_URL = "classroom:home"
 
-LOGOUT_REDIRECT_URL = ""
+LOGOUT_REDIRECT_URL = "classroom:home"
 
 
 # Internationalization
@@ -151,3 +153,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Third party apps configuration
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change_list' %}">Minhas Avaliações</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change' quiz.pk %}">{{ quiz.name }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Confirmar delete da Avaliação</li>
+      </ol>
+    </nav>
+    <h1 class="title">Confirmar delete da Avaliação</h1>
+    <h2 class="subtitle">
+      Tem certeza que deseja deletar a avaliação <strong>"{{ quiz.name }}"</strong>? Não tem como voltar atrás.
+    </h2>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger btn-lg">Sim, eu tenho certeza!</button>
+      <a href="{% url 'classroom:quiz_change' quiz.pk %}" class="btn btn-outline-secondary btn-lg" role="button">Cancelar</a>
+    </form>
+  </div>
+</section>
+  
+  
+  
+{% endblock %}
