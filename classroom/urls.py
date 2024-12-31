@@ -16,9 +16,9 @@ urlpatterns = [
     path("alunos/avaliacoes_respondidas/", students.TakenQuizListView.as_view(), name="taken_quiz_list"),
     path("alunos/avaliacao/<int:pk>/", students.take_quiz, name="take_quiz"),
     # path("alunos/desafios/", students.desafios, name="desafios"),
-    # path("alunos/perfil/<int:pk>/", students.return_profile, name="return_profile"),
+    path("alunos/perfil/<int:pk>/", students.return_profile, name="return_profile"),
     path("alunos/avaliacao_respondida/<int:pk>/", students.studentAnswerView, name="student_answer"),
-    # path("ranking/", students.ranking, name="ranking"),
+    path("ranking/", students.ranking, name="ranking"),
     ############################################################################################################
     path("professor/", teachers.TeacherProfileView.as_view(), name="teacher_profile"),
     path("professor/avaliacao/", teachers.QuizListView.as_view(), name="quiz_change_list"),
@@ -33,7 +33,7 @@ urlpatterns = [
         teachers.QuestionDeleteView.as_view(),
         name="question_delete",
     ),
-    # path("professor/teacher_student_answer/<int:pk>/",teachers.teacherStudentAnswerView, name="teacher_student_answer"),
+    path("professor/teacher_student_answer/<int:pk>/", teachers.teacherStudentAnswerView, name="teacher_student_answer"),
     path("professor/teacher_quiz_graphic/<int:pk>/", teachers.QuizGraphicView.as_view(), name="quiz_graphic"),
 ]
 

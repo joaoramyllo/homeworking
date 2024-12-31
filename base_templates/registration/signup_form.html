@@ -6,24 +6,22 @@
       <div class="col-sm-6 banner-info">
         <h1 class="h3 mb-0 text-gray-800">Cadastre-se</h1>
         <p>Preecha os campos para fazer o seu cadastro.</p>
-        <div class="shadow p-3 mb-5 bg-white rounded" "card">
+        <div class="shadow p-3 mb-5 bg-white rounded">
           <div class="card-body">
             {% if form.non_field_errors %}
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {% for error in form.non_field_errors %}
                   <p>
                     {% if forloop.last %}class="mb-0"{% endif %}
-                    >{{ error }}
+                    {{ error }}
                   </p>
                 {% endfor %}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
             {% endif %}
             <form method="post" novalidate>
               {% csrf_token %}
-              <input type="hidden" name="next" value="{{ next }}">
+              <input type="hidden" name="next" value="{{ next }}" />
               {{ form|crispy }}
               <button type="submit" class="btn btn-info">Cadastrar</button>
             </form>
@@ -32,27 +30,14 @@
       </div>
       <div class="col-sm-6 banner-image">
         <div class="d-flex flex-row-reverse">
-          <a class="btn btn-first"
-             href="{% url 'classroom:home' %}"
-             "
-             nav-link
-             text-left
-             "
-             role="button"> <i class="fas fa-home"></i> <span>Início</span> </a>
+          <a class="btn btn-first nav-link text-left" href="{% url 'classroom:home' %}" role="button"><i class="fas fa-home"></i> <span>Início</span></a>
         </div>
-        <br>
-        {% comment %} <img src="{% static 'img/Cadastro.jpg' %}" class="img-fluid" alt="LearningSI"> {% endcomment %}
+        <br />
+        {% comment %} <img src="{% static 'img/Cadastro.jpg' %}" class="img-fluid" alt="LearningSI" /> {% endcomment %}
       </div>
     </div>
   </div>
-</div>
-<br>
-<a class="btn btn-first"
-   href="{% url 'home' %}"
-   "
-   nav-link
-   text-left
-   "
-   role="button"> <i class="fas fa-home"></i> <span>Início</span> </a>
-{% endblock content %}
-<br>
+  <br />
+  <a class="btn btn-first nav-link text-left" href="{% url 'classroom:home' %}" role="button"><i class="fas fa-home"></i> <span>Início</span></a>
+{% endblock %}
+<br />

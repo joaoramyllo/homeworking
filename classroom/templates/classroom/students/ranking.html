@@ -1,16 +1,17 @@
-{% extends 'newbase.html' %}
+{% extends "global/base_dashboard.html" %}
+
 {% load static %}
 {% block scripts_head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/newbase.css' %}">
 
 {% endblock scripts_head %}
+
 {% block content %}
 
 
 <div class="col-md-12 mt-4">
     <div class="row justify-content-md">
         <div class="col-sm-6">
-        <div class="shadow p-3 mb-5 bg-white rounded" "card">
+        <div class="shadow p-3 mb-5 bg-white rounded">
             <div class="card-body">
                 <h1 class="h3 mb-0 text-gray-800">Ranking de Pontuação:</h1><br>
                 <div class="table-responsive">
@@ -29,15 +30,12 @@
                         {% for quiz_profile in top_quiz_profiles %}
                         
                             {% if quiz_profile.is_student %}    
-                                   
                                 <tr >
                                     <td>{{ forloop.counter }}</td>
                                     <td><a href="{% url 'classroom:return_profile' quiz_profile.pk %}">{{ quiz_profile.username }}</a></td>                
                                     <td>{{ quiz_profile.points }}</td>
-
-                                    
                                     <td> 
-                                    
+
                                     {% if quiz_profile.level == 1%}
                                         <img src="{% static 'img/bronze.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
                                     {% elif quiz_profile.level == 2%}
@@ -55,12 +53,10 @@
                                     {% elif quiz_profile.level == 8%}    
                                         <img src="{% static 'img/esmeralda.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>    
                                     {% endif %}
-                                     {{ quiz_profile.level }}
-                                    </td>
-                                    
-                                    
+                                    {{ quiz_profile.level }}
+
+                                    </td>  
                                 </tr>
-                                
                             {% endif %}    
                         {% endfor %}
                                 
@@ -70,11 +66,6 @@
                 </div>
             </div>
         </div>
-
-        
-        
-       
-
 
         <div class="col-sm-6">
             <div class="shadow p-3 mb-5 bg-white rounded" "card">
@@ -134,15 +125,7 @@
             </div>
         </div>
     </div>
-
-
-    </div>
 </div>
-    
-
-    
-    
-
 <br><br><br><br>
 
 {% endblock %}

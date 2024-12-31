@@ -1,13 +1,10 @@
-{% extends 'newbase.html' %}
+{% extends "global/base_dashboard.html" %}
+
 {% load static %}
-{% block scripts_head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/newbase.css' %}">
 
-{% endblock scripts_head %}
 {% block content %}
+
 <br>
-
-
 <div class="col-md-12">  
     <div class="row justify-content-md-center"> 
       
@@ -25,24 +22,23 @@
           <div style="border: 1px solid #000;border-radius: 8px;" class="card-body">
             <div class="col-md-12">            
               <div class="row justify-content-md-center"> 
-                <h3> <strong> {{unic.username}} </strong>
+                <h3> <strong> {{unic.username}} </strong></h3>
                 {% if unic.level == 1%}
-                  <img src="{% static 'img/bronze.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                  <h3><img src="{% static 'classroom/img/bronze.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
                 {% elif unic.level == 2%}
-                  <img src="{% static 'img/prata.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                  <h3><img src="{% static 'classroom/img/prata.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
                 {% elif unic.level == 3%}
-                  <img src="{% static 'img/ouro.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>  
+                  <h3><img src="{% static 'classroom/img/ouro.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>  
                 {% elif unic.level == 4%}
-                  <img src="{% static 'img/diamante.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                  <h3><img src="{% static 'classroom/img/diamante.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
                 {% elif unic.level == 5%}
-                  <img src="{% static 'img/ametista.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                  <h3><img src="{% static 'classroom/img/ametista.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
                 {% elif unic.level == 6%}
-                  <img src="{% static 'img/tumalina.png' %}" class="img-fluid" alt="Patamar" width="45" height="45"> </h3>
+                  <h3><img src="{% static 'classroom/img/tumalina.png' %}" class="img-fluid" alt="Patamar" width="45" height="45"> </h3>
                 {% elif unic.level == 7%}
-                  <img src="{% static 'img/ruby.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
+                  <h3><img src="{% static 'classroom/img/ruby.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>
                 {% elif unic.level == 8%}    
-                  <img src="{% static 'img/esmeralda.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>          
-                  
+                  <h3><img src="{% static 'classroom/img/esmeralda.png' %}" class="img-fluid" alt="Patamar" width="40" height="40"> </h3>          
                 {% endif %}
               </div>            
             </div>  
@@ -80,7 +76,7 @@
           <h4 >Insígnias</h4>
                 
                 
-                <div class="shadow p-3 mb-5 bg-white rounded" "card">
+                <div class="shadow p-3 mb-5 bg-white rounded">
                 
                 <div class="card-body">
                 
@@ -122,14 +118,13 @@
       </div>
     </div>
 </div>
-
-
-    <br><br><br><br>
-    {% block finalPage %}
+<br><br><br><br>
+    {% comment %} {% block finalPage %}
         <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
         </script>
-    {% endblock %}
-{% endblock %}
+    {% endblock finalPage %} {% endcomment %}
+
+{% endblock content %}
