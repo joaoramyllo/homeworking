@@ -80,8 +80,6 @@
         </div>
       </div>
 
-      <!---->
-     
       <h2>Tarefas</h2>
       <div class="row justify-content-md-center">
         
@@ -107,21 +105,18 @@
               <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> Tarefas Concluídas, Parabéns! </span>
             </div>
           </div>
-         
-          
         </div>
 
-     
       </div>
       <br>
       <div class="row justify-content-md">
         
         <div class="col-sm-12">
-          <div class="shadow p-3 mb-5 bg-white rounded" class="card">                
+          <div class="shadow p-3 mb-5 bg-white rounded" "card">                
             <div class="card-body">
               <h5 class="card-title mb-4">Tarefas a serem Concluídas:</h5>
               <div class="d-flex flex-row-reverse">
-                <a href="{% url 'students:add_tarefa' %}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                <a href="{% url 'classroom:add_tarefa' %}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
                   Adicionar tarefa</a>
               </div>
             </div>
@@ -141,7 +136,7 @@
                     {% if list.list_student.id  == user.id %}
                         <tr>
                             
-                            <td > <a href="{% url 'students:concluir_tarefa' list.id %}" title="">{{ list.item }} </a></td>
+                            <td > <a href="{% url 'classroom:concluir_tarefa' list.id %}" title="">{{ list.item }} </a></td>
                             <td>{{ list.start_date }}</td>
                             <td>{{ list.end_date }}</td>
                         </tr>
@@ -155,9 +150,6 @@
               </table>
           </div>
           </div>
-
-
-
           </div>
           
         </div>
@@ -178,7 +170,7 @@
       <h2 >Insígnias <i class="fas fa-medal"></i></h2>
       
       
-      <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+      <div class="shadow p-3 mb-5 bg-white rounded" "card">
         
         <div class="card-body">
          
@@ -220,7 +212,7 @@
        
       </div>
       <div class="d-flex flex-row-reverse">
-        <a style="margin-right: 10px; color: #0d0354;" href="{% url 'students:desafios' %}" ></i>
+        <a style="margin-right: 10px; color: #0d0354;" href="{% url 'classroom:desafios' %}" ></i>
           Visualizar Desafios <i class="fas fa-crown"></i></a> 
       </div><br>
     </div>

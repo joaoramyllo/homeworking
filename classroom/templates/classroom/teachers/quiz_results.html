@@ -1,0 +1,81 @@
+{% extends "global/base_dashboard.html" %}
+{% load crispy_forms_tags humanize %}
+
+{% block scripts_head %}
+<style>
+  .table-responsive {
+    display: table;
+  }
+  .align-right {
+    align-items: right;
+  }
+</style>
+{% endblock scripts_head %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Minhas Avaliações</li>
+    <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change' quiz.pk %}">{{ quiz.name }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Resultados</li>
+  </ol>
+</nav>
+<div class="d-flex flex-row-reverse">
+  <a href="{% url 'classroom:home' %}"  class="btn btn-primary mb-3" role="button"> <i class="fas fa-arrow-left"></i> Voltar</a>
+</div>
+<div class="col-md-12">
+  <div class="row justify-content-md-center">
+    <div class="col-sm-10">
+      <h1 class="h3 mb-0 text-gray-800">
+        Resultados da avaliação: {{ quiz.name }} 
+        <div class="d-flex flex-row-reverse">
+          <br>
+          <a class="btn btn-primary" href="{% url 'classroom:quiz_graphic' quiz.pk %}"><i class="fas fa-chart-bar"></i> Ver gráfico</a>
+        </div>
+      </h1>
+      <br>
+      <div class="col-md-12">
+        <!-- title -->
+        <div class="d-md-flex align-items-center">
+          <h4 class="card-title">Ranking das notas:</h4>
+        </div>
+        <!-- title -->
+      </div>
+      <div class="table-responsive">
+        <table  class="table table-responsive w-100 d-block d-md-table">
+          <thead>
+            <tr >
+              <th scope="col"></th>
+              <th scope="col">#</th>
+              <th scope="col">Nome <i class="fas fa-users"></i></th>
+              <th scope="col"class="text-success"> Acertou  <i class="fas fa-thumbs-up"></i></th>
+              <th scope="col"class="text-danger"> Errou  <i class="fas fa-thumbs-down"></i></th>
+              <th scope="col">Nota  <i class="fas fa-poll-h"></i></th>
+              <th scope="col">Visualizar Respostas <i class="far fa-eye"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for taken_quiz in taken_quizzes %}
+              <tr>
+                <td scope="col"></td>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ taken_quiz.student.user.first_name }} {{ taken_quiz.student.user.last_name }}</td>
+                <td>{{ taken_quiz.correct_answers }}</td>
+                <td>{{ taken_quiz.incorrect_answers }}</td>
+                <td>{{ taken_quiz.score }}</td>
+                <td><a class="btn btn-success" href="{% url 'classroom:teacher_student_answer' taken_quiz.pk %}" >Visualizar </a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="card-footer text-muted">
+          <p class="badge badge-pill badge-primary float-right"> Média de notas: {{ quiz_score.average_score|default_if_none:0.0 }}</p>
+          <span class="align-right"> Alunos que responderam: <strong> {{ total_taken_quizzes }}</strong></span>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+<br>
+<br>
+{% endblock content %}

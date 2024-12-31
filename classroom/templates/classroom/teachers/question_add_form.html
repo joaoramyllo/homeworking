@@ -1,45 +1,41 @@
-{% extends 'global/base_dashboard.html' %}
+{% extends "global/base_dashboard.html" %}
 
 {% block content %}
-
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        {% comment %} <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change_list' %}">Minhas Avaliações</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change' quiz.pk %}">{{ quiz.name }}</a></li> {% endcomment %}
+        {% comment %} <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change_list' %}">Minhas Avaliações</a>
+        </li>
+        <li class="breadcrumb-item"><a href="{% url 'classroom:quiz_change' quiz.pk %}">{{ quiz.name }}</a></li>
+        {%endcomment %}
         <li class="breadcrumb-item active" aria-current="page">Adicionar nova questão</li>
     </ol>
 </nav>
-
-
-<h1 class="h3 mb-0 text-gray-800">Adicionar nova questãoo</b></h1><br>
+<h1 class="h3 mb-0 text-gray-800">
+    <b>Adicionar nova questão</b>
+</h1>
+<br>
 <p>Adicione primeiro o texto da pergunta. Na próxima etapa, você poderá adicionar as respostas possíveis.</p>
-
 <div class="col-md-12">
-
     <div class="row justify-content-md-center">
-
         <div class="col-sm-7">
-
             <br>
             <div class="form-group">
-
                 <form method="post" novalidate>
                     {% csrf_token %}
                     {% comment %} {{ form.media }} {% endcomment %}
                     {{ form.as_p }}
                     <small>Caso utilize imagens, o tamanho recomendado é de <strong>400px de largura</strong>.</small>
                     <br>
-                    <button type="submit" class="btn btn-success">Adicionar <i class="fas fa-check-circle"></i></button>
+                    <button type="submit" class="btn btn-success">
+                        Adicionar <i class="fas fa-check-circle"></i>
+                    </button>
                     <a href="{% url 'classroom:quiz_change' quiz.pk %}" class="btn btn-danger" role="button">Cancelar <i
                             class="fas fa-window-close"></i></a>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
-
-
-<br><br>
-
-{% endblock %}
+<br>
+<br>
+{% endblock content %}

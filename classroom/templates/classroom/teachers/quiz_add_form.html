@@ -1,7 +1,7 @@
 {% extends "global/base_dashboard.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}Adicionar Tarefa{% endblock %}
+{% block title %}Adicionar Tarefa{% endblock title %}
 
 {% block content %}
     <div class="container">
@@ -14,10 +14,9 @@
                     <br>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                     <a href="{% url 'classroom:quiz_change_list' %}" class="btn btn-danger" role="button">Cancelar</a>
-                    </form> 
-                </form>
+                </form> 
             </div>
         </div>
     </div>
 
-{% endblock %}
+{% endblock content %}

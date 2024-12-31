@@ -1,9 +1,9 @@
-{% extends 'newbase.html' %}
-{% load static %}
-{% block scripts_head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/newbase.css' %}">
+{% extends "global/base_dashboard.html" %}
 
-{% endblock scripts_head %}
+{% load static %}
+
+{% block title %}Avaliações Respondidas{% endblock %}
+
 {% block content %}
 
 
@@ -11,11 +11,12 @@
   <div class="row justify-content-md-center">    
     <div class="col-sm-10">
       <br>
-      <h1>Avaliações Respondidas</h1><br>
+      <h1>Avaliações Respondidas </h1>
+      <br>
       <p> Aqui são encontras todas as Avaliações que foram Respondidas, juntamente com as suas Notas!   </p>
 
 <div class="col-md-12 mt-4">
-  <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+  <div class="shadow p-3 mb-5 bg-white rounded" "card">
       <div class="card-body">
         
       <div class="table-responsive">
@@ -40,7 +41,7 @@
                     <td>{{ taken_quiz.correct_answers }}</td>
                     <td>{{ taken_quiz.incorrect_answers }}</td>
         
-                    <td><a class="btn btn-success btn-sm" href="{% url 'students:student_answer' taken_quiz.pk %}">Visualizar</a></td>
+                    <td><a class="btn btn-success btn-sm" href="{% url 'classroom:student_answer' taken_quiz.pk %}">Visualizar</a></td>
                   </tr>
                 {% empty %}
                   <tr>

@@ -69,8 +69,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row">
-                        <p class="">Desafios concluídos: {{user.total_desafio_concluidos}} de 36 <i
-                                class="fas fa-crown"></i></p>
+                        <p class="">Desafios concluídos: {{user.total_desafio_concluidos}} de 36 <i class="fas fa-crown"></i></p>
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -597,7 +596,7 @@
             {% if list.list_student.id == user.id %}
             <tr>
 
-                <td> <a href="{% url 'students:concluir_tarefa' list.id %}" title="">{{ list.item }} </a></td>
+                <td> <a href="{% url 'classroom:concluir_tarefa' list.id %}" title="">{{ list.item }} </a></td>
                 <td>{{ list.start_date }}</td>
                 <td>{{ list.end_date }}</td>
             </tr>

@@ -1,41 +1,58 @@
 {% extends 'registration/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-<section>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 col-centered">
-        <h1 class="h3 mb-0 text-gray-800">Cadastre-se</b></h1>
-        <p class="">Preecha os campos para fazer o seu cadastro.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 offset-md-3 mt-3">
-
-        <form method="post" novalidate>     
-          {% csrf_token %} {% for field in form %}
-          <div class="form-group">
-            {{ field.label_tag }}
-            <input
-              type="{% if 'password' in field.label_tag %}password{% else %}text{% endif %}"
-              name="{{ field.html_name }}"
-              class="form-control"
-              maxlength="{% if 'username' in field.label_tag %}150{% endif %}"
-              id="{{ field.id_for_label }}"
-              required
-            />
+      <div class="col-sm-6 banner-info">
+        <h1 class="h3 mb-0 text-gray-800">Cadastre-se</h1>
+        <p>Preecha os campos para fazer o seu cadastro.</p>
+        <div class="shadow p-3 mb-5 bg-white rounded" "card">
+          <div class="card-body">
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% for error in form.non_field_errors %}
+                  <p>
+                    {% if forloop.last %}class="mb-0"{% endif %}
+                    >{{ error }}
+                  </p>
+                {% endfor %}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endif %}
+            <form method="post" novalidate>
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ next }}">
+              {{ form|crispy }}
+              <button type="submit" class="btn btn-info">Cadastrar</button>
+            </form>
           </div>
-          {% if field.errors %} {% for error in field.errors %}
-          <p style="font-size: 13px;">
-            {{ error|escape }}
-          </p>
-          {% endfor %} {% endif %} {% endfor %}
-          <button type="submit" class="btn btn-primary mt-2">Register</button>
-        </form>
-
-
+        </div>
+      </div>
+      <div class="col-sm-6 banner-image">
+        <div class="d-flex flex-row-reverse">
+          <a class="btn btn-first"
+             href="{% url 'classroom:home' %}"
+             "
+             nav-link
+             text-left
+             "
+             role="button"> <i class="fas fa-home"></i> <span>Início</span> </a>
+        </div>
+        <br>
+        {% comment %} <img src="{% static 'img/Cadastro.jpg' %}" class="img-fluid" alt="LearningSI"> {% endcomment %}
       </div>
     </div>
   </div>
-</section>
-{% endblock %}
+</div>
+<br>
+<a class="btn btn-first"
+   href="{% url 'home' %}"
+   "
+   nav-link
+   text-left
+   "
+   role="button"> <i class="fas fa-home"></i> <span>Início</span> </a>
+{% endblock content %}
+<br>

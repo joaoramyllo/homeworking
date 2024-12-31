@@ -13,10 +13,10 @@
     <div class="row justify-content-md-center">     
       <div class="col-sm-6">
         
-        <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+        <div class="shadow p-3 mb-5 bg-white rounded" "card">
           <h1 class="">{{ quiz.name }}</b></h1>
           <div class="d-flex flex-row-reverse">
-            {% comment %} <a href="{% url 'teachers:quiz_results' quiz.pk %}" class="btn btn-primary float-right">Visualizar resultados  <i class="fas fa-eye"></i></a> {% endcomment %}
+            {% comment %} <a href="{% url 'classroom:quiz_results' quiz.pk %}" class="btn btn-primary float-right">Visualizar resultados  <i class="fas fa-eye"></i></a> {% endcomment %}
           </div>
           <div class="card-body">
             <form method="post" novalidate>
@@ -30,7 +30,7 @@
       </div>
   
       <div class="col-sm-6">
-        <div class="shadow p-3 mb-5 bg-white rounded" class="card">
+        <div class="shadow p-3 mb-5 bg-white rounded" "card">
           <div class="card-body"><div class="card-title text-muted">
             <p class="float-right"> Questões Adicionadas: {{ quiz.questions.count }}</p>
             

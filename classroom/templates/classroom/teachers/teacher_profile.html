@@ -5,10 +5,81 @@
 <h1 class="mt-4">Seja Bem-Vindo!</h1>
 <h3 class="mt-4">Aqui vai ser a dashboard do prof</h3>
 
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Seus Alunos</h5>
+            </div>
+            <div class="card-body">
+                
+                <canvas id="acertosChart" width="400" height="400"></canvas>
+                
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    var ctxAcertos = document.getElementById('acertosChart').getContext('2d');
+                    var acertosChart = new Chart(ctxAcertos, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Acertos', 'Erros'],
+                            datasets: [{
+                                label: 'Porcentagem de Acertos',
+                                data: [70, 30], // Substitua pelos dados reais
+                                backgroundColor: ['#36a2eb', '#ff6384'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Seus Alunos</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="errosChart" width="400" height="400"></canvas>
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    var ctxErros = document.getElementById('errosChart').getContext('2d');
+                    var errosChart = new Chart(ctxErros, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Acertos', 'Erros'],
+                            datasets: [{
+                                label: 'Porcentagem de Erros',
+                                data: [30, 70], // Substitua pelos dados reais
+                                backgroundColor: ['#36a2eb', '#ff6384'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
 {% endblock content %}
-
-
-
-
-
-

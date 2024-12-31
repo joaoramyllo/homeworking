@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView
 
 from ..decorators import student_required
 from ..forms import (
@@ -35,8 +35,13 @@ from search_views.filters import BaseFilter
 from datetime import datetime
 
 
-def StudentProfileView(request):
-    return render(request, "classroom/students/student_profile.html")
+@method_decorator([login_required, student_required], name="dispatch")
+class StudentProfileView(DetailView):
+    model = User
+    template_name = "classroom/students/student_profile.html"
+
+    def get_object(self):
+        return self.request.user
 
 
 class StudentSignUpView(CreateView):
@@ -399,7 +404,3 @@ def concluir_tarefa(request, pk):
         return redirect("classroom:student_profile")
 
     return render(request, "classroom/students/concluir_tarefa.html", {"list": list})
-
-
-def dfdsfdf():
-    pass

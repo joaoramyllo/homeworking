@@ -1,0 +1,59 @@
+{% extends "global/base_dashboard.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br>
+<div class="col-md-12">
+  <div class="row justify-content-md-center">
+
+    <div class="col-sm-8">
+
+      <div class="d-flex flex-row-reverse">
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary mb-3" role="button"> <i
+            class="fas fa-arrow-left"></i> Voltar</a>
+      </div>
+      <div class="shadow p-3 mb-5 bg-white rounded" "card">
+        <div class="card-body">
+          <h1 class="h3 mb-0 text-gray-800">{{ quiz_take.quiz }}</h1>
+          <br>
+          <p>Aqui está disponível para consulta as suas respostas do Estudante
+            na Avaliação <strong> {{ quiz_take.quiz }}</strong>.</p>
+
+          <div class="table-responsive">
+            <table class="table v-middle">
+              <thead>
+                <tr>
+                  <th></th>
+
+                  <th>Aluno</th>
+                  <th>Avaliação Pertecente</th>
+                  <th>Resposta</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for ans in answer %}
+                {% if quiz_take.quiz == ans.quiz %}
+                {% if quiz_take.student == ans.student %}
+                <tr>
+                  <td> </td>
+
+                  <td>{{ ans.student.user.first_name }} {{ ans.student.user.last_name }} </td>
+                  <td>{{ ans.quiz }}</td>
+                  <td>{{ ans.answer }}</td>
+
+                  <td></td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br><br><br>
+{% endblock content %}
