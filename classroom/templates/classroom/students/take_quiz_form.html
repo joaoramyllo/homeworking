@@ -1,39 +1,45 @@
-{% extends "global/base_dashboard.html" %}
+{% extends 'global/base_dashboard.html' %}
 
 {% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
-<br>
+  <br />
 
-<div class="col-md-12">
-  
-  <div class="row justify-content-md-center">
-    
-    <div class="col-sm-8">
-      <h2 >Avaliação: <b>{{ quiz.name }}</b></h2><br>
-      <div class="card">
-        <div class="card-body">
-          <div class="progress mb-3">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%"></div>
+  <div class="col-md-12">
+    <div class="row justify-content-md-center">
+      <div class="col-sm-8">
+        <h2>Avaliação: <b>{{ quiz.name }}</b></h2><br />
+        <div class="card">
+          <div class="card-body">
+            <div class="progress mb-3">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%"></div>
+            </div>
+
+            <br />
+            <div class="form-group">
+              <center>
+                <p class="lead">Questão: {{ question.text|safe }}</p>
+              </center>
+              <form method="post" novalidate>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <br />
+                <button type="submit" class="btn btn-primary">Próxima <i class="fas fa-arrow-right"></i></button>
+              </form>
+            </div>
           </div>
-          
-          <br>
-          <div class="form-group">
-            <center><p class="lead">Questão: {{ question.text | safe}}</p></center>
-          <form method="post" novalidate>
-            {% csrf_token %}
-            {{ form|crispy}}
-            <br>
-            <button type="submit" class="btn btn-primary">Próxima <i class="fas fa-arrow-right"></i></button>
-          </form>   
-          </div>             
-        </div>      
+        </div>
       </div>
-  </div>      
+    </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-sm-8">
+        <form method="post" action="{% url 'classroom:help_answer' quiz.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success">Obter ajuda</button>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
- 
-<br><br><br><br>
-  
 {% endblock %}

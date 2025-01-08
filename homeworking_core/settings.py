@@ -11,8 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
+from django.core.management.utils import get_random_secret_key
 
-from django.forms import Media
+env = environ.Env(
+    DEBUG=(bool, False),
+)
 
 # from fastapi.staticfiles import StaticFiles
 
@@ -24,12 +28,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-1yvx2un=yl7nf50q3c1%ld77if91y))_hxt1(tl66cadx+k+5#"
+# SECRET_KEY = "django-insecure-1yvx2un=yl7nf50q3c1%ld77if91y))_hxt1(tl66cadx+k+5#"
+SECRET_KEY = env.str("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "django-fridge.fly.dev"]
+
+CSRF_TRUSTED_ORIGINS = ["https://django-fridge.fly.dev"]
 
 
 # Application definition
@@ -42,10 +49,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    # Apps
+    "classroom",
+    # 3rd party apps
     "crispy_forms",
     "crispy_bootstrap5",
-    "classroom",
     # "ckeditor",
+    "django_htmx",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "homeworking_core.urls"
@@ -137,15 +148,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 # Foi adcionado o STATICFILES_DIRS para que o Django possa encontrar os arquivos estáticos.
 
-STATIC_URL = "static/"
-
+STATIC_URL = "static/"  # URL para acessar os arquivos estáticos
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Diretório onde os arquivos estáticos serão armazenados para produção
 STATICFILES_DIRS = [
-    BASE_DIR / "base_static",
+    BASE_DIR / "static",  # Diretório onde os arquivos estáticos estão localizados
 ]
 
-# Configuração do FastAPI para servir os arquivos estáticos
-STATIC_ROOT = BASE_DIR / "static"
-
+# Configuração do Django para servir os arquivos estáticos
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -158,5 +167,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Third party apps configuration
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Configuracao do Ollama
+OLLAMA_HOST = env("OLLAMA_HOST", default="http://localhost:11434")
+# OLLAMA_HOST = "http://localhost:11434"  # when Ollama running locally

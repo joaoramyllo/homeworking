@@ -4,7 +4,6 @@
 
 {% block content %}
 
-<br>
 <div class="col-md-12">  
     <div class="row justify-content-md-center"> 
       
@@ -73,7 +72,7 @@
             </div>          
           </div>
           <br>
-          <h4 >Insígnias</h4>
+          <h4> Insígnias </h4>
                 
                 
                 <div class="shadow p-3 mb-5 bg-white rounded">
@@ -119,12 +118,13 @@
     </div>
 </div>
 <br><br><br><br>
-    {% comment %} {% block finalPage %}
+
+    {% block finalPage %}
         <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
         </script>
-    {% endblock finalPage %} {% endcomment %}
+    {% endblock finalPage %}
 
 {% endblock content %}

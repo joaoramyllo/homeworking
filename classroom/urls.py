@@ -8,6 +8,7 @@ app_name = "classroom"
 
 urlpatterns = [
     path("", classroom.home, name="home"),
+    path("test/", classroom.test, name="test"),
     path("alunos/", students.StudentProfileView.as_view(), name="student_profile"),
     path("alunos/adicionar_tarefa", students.add_tarefa, name="add_tarefa"),
     # path("alunos/concluir_tarefa/<int:pk>/", students.concluir_tarefa, name="concluir_tarefa"),
@@ -15,7 +16,7 @@ urlpatterns = [
     # path("alunos/alterar_periodo/", students.StudentInterestsView.as_view(), name="student_interests"),
     path("alunos/avaliacoes_respondidas/", students.TakenQuizListView.as_view(), name="taken_quiz_list"),
     path("alunos/avaliacao/<int:pk>/", students.take_quiz, name="take_quiz"),
-    # path("alunos/desafios/", students.desafios, name="desafios"),
+    path("alunos/avaliacao/<int:pk>/ajuda", students.help_answer, name="help_answer"),
     path("alunos/perfil/<int:pk>/", students.return_profile, name="return_profile"),
     path("alunos/avaliacao_respondida/<int:pk>/", students.studentAnswerView, name="student_answer"),
     path("ranking/", students.ranking, name="ranking"),

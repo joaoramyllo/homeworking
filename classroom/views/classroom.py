@@ -17,3 +17,7 @@ def home(request):
         elif request.user.is_teacher:
             return redirect("classroom:teacher_profile")
     return render(request, "global/home.html")
+
+
+def test(request):
+    return render(request, "global/test.html")

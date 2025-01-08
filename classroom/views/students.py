@@ -3,10 +3,13 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.db.models import Count
+from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from ollama import Client
+from django.conf import settings
 from django.views.generic import CreateView, ListView, UpdateView, DetailView
 
 from ..decorators import student_required
@@ -223,6 +226,71 @@ def take_quiz(request, pk):
             "progress": progress,
         },
     )
+
+
+client = Client(host=settings.OLLAMA_HOST)
+
+
+def help_answer2(request, pk):
+
+    quiz = get_object_or_404(Quiz, pk=pk)
+    student = request.user.student
+    unanswered_questions = student.get_unanswered_questions(quiz)
+    question = unanswered_questions.first()
+
+    if request.htmx:
+        if request.method == "POST" and request.POST.get("question"):
+            description = request.POST.get("question")
+            output = client.generate(
+                model="qwen2.5-coder:0.5b",
+                prompt=f"Should {description} be stored in the fridge? Provide a concise answer followed by a brief "
+                f"explanation.",
+                stream=False,
+            )
+            context = {
+                "response": output["response"],
+                "description": description,
+            }
+            return render(request, "partials/response.html", context=context)
+        return HttpResponseNotFound("Please provide an item.")
+    return render(request, "classroom/students/take_quiz_form.html", {"quiz": quiz, "question": question})
+
+
+def help_answer(request, pk):
+    quiz = get_object_or_404(Quiz, pk=pk)
+    question = quiz.questions.first()
+    text = question.text
+
+    if request.method == "POST":
+        output = client.generate(
+            model="qwen2.5-coder:0.5b",
+            prompt=f"{text}" f"explicação.",
+            stream=False,
+        )
+        print(output)
+        context = {
+            "response": output["response"],
+            "description": {text},
+        }
+        return render(request, "classroom/students/partials/response.html", context=context)
+
+    # if request.htmx:
+    #     if request.method == "POST" and request.POST.get(text):
+    #         description = request.POST.get(text)
+    #         output = client.generate(
+    #             model="qwen2.5-coder:0.5b",
+    #             prompt=f"Should {description} be stored in the fridge? Provide a concise answer followed by a brief "
+    #             f"explanation.",
+    #             stream=False,
+    #         )
+    #         print(output)
+    #         context = {
+    #             "response": output["response"],
+    #             "description": description,
+    #         }
+    #         return render(request, "partials/response.html", context=context)
+    #     return HttpResponseNotFound("Please provide an item.")
+    # return render(request, "classroom/students/help_answer.html")
 
 
 def count_level(current_user):
